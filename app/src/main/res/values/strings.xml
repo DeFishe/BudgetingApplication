@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BudgetingApplication</string>
+    <string name="current_expenses_header">Your Budget...</string>
+    <string name="weekly_income">Your weekly income: </string>
+    <string name="current_tax_bracket">Your current tax bracket: </string>
+    <string name="total_sum_expenses">The total sum (%) Budget:Tax ratio: </string>
 </resources>
