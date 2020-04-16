@@ -25,7 +25,6 @@
             android:exported="true"
             android:label="@string/title_activity_new_budget"
             android:theme="@style/AppTheme.NoActionBar"
-            android:exported="true"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
