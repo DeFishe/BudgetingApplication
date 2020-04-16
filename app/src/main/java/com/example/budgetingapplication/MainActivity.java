@@ -1,3 +1,17 @@
+/********************************************
+ Program:  BudgetingApplication a.k.a SmolBudget
+ Purpose: To create a simple budgeting application for young adults who want to start budgeting small.
+ Author:  Darian Fisher, Jesse Thomas, Logan Jones
+ Date: Mar 31,2020
+ ********************************************/
+
+/********************************************
+ Name: class MainActivity
+ Purpose:  The starting point for our application.
+ Notes:  NA
+ ********************************************/
+
+
 package com.example.budgetingapplication;
 
 import androidx.appcompat.app.AppCompatActivity;

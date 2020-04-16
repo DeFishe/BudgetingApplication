@@ -11,24 +11,44 @@
         android:layout_width="119dp"
         android:layout_height="36dp"
         android:text="Budget: $$.$$/week"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="67dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/editBudgetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="241dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Edit Budget"
+        app:layout_constraintBottom_toTopOf="@+id/bugetDetailsButton"
+        app:layout_constraintEnd_toEndOf="@+id/bugetDetailsButton"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/bugetDetailsButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982"
         tools:text="Edit Budget" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bugetDetailsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="428dp"
         android:text="Budget Details"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="306dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
