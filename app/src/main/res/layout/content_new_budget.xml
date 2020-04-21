@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/incomeHeaderTextView"
+            android:id="@+id/incomeHeaderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Income"
@@ -51,7 +51,7 @@
                     android:textAlignment="viewEnd" />
 
                 <EditText
-                    android:id="@+id/incomeField"
+                    android:id="@+id/primaryIncomeField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -64,14 +64,14 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/secondaryIncomeView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Secondary Income"
                     android:textAlignment="viewEnd" />
 
                 <EditText
-                    android:id="@+id/editText10"
+                    android:id="@+id/secondaryIncomeField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -82,7 +82,7 @@
         </TableLayout>
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/expensesHeaderView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Expenses"
@@ -105,7 +105,7 @@
                     android:text="Housing" />
 
                 <EditText
-                    android:id="@+id/editText11"
+                    android:id="@+id/housingField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -124,7 +124,7 @@
                     android:text="Utilities" />
 
                 <EditText
-                    android:id="@+id/editText15"
+                    android:id="@+id/utilitesField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -143,7 +143,7 @@
                     android:text="Food" />
 
                 <EditText
-                    android:id="@+id/editText16"
+                    android:id="@+id/foodField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -162,7 +162,7 @@
                     android:text="Transportation" />
 
                 <EditText
-                    android:id="@+id/editText17"
+                    android:id="@+id/transportationField"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -176,6 +176,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="updateBudget"
             android:text="Save"
             android:textAlignment="center" />
     </LinearLayout>

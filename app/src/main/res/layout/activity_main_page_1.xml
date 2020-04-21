@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/editBudgetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="149dp"
@@ -36,7 +36,7 @@
         tools:text="Edit Budget" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bugetDetailsButton"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="136dp"
