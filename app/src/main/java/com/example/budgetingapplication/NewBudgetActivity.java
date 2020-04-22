@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -114,7 +115,8 @@ public class NewBudgetActivity extends AppCompatActivity
         editText.setHint(String.valueOf(budget.transportationExpenses));
     }
 
-    //Method that updates budget file when update is button is clicked
+
+    //Method that updates budget file when update is button is clicked FIXME: bruh read the last 4 words again lol
     public void updateBudget(View view)
     {
         //Instantiates EditText object for later use

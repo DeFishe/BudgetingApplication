@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page_1);
 
-        button2 = findViewById(R.id.button2);
+        button2 = findViewById(R.id.budgetDetailsButton);
                   button2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
                          }
                   });
 
-        button = findViewById(R.id.button);
+        button = findViewById(R.id.editBudgetButton);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
