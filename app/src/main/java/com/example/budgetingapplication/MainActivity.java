@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
         setContentView(R.layout.activity_main_page_1);
 
         button2 = findViewById(R.id.budgetDetailsButton);
-                  button2.setOnClickListener(new View.OnClickListener() {
+                  button2.setOnClickListener(new View.OnClickListener() { // Fixme: Is the indentation on this wonky or just me?
                         @Override
                         public void onClick(View v) {
                              openViewBudget();
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
                         openMainCreateBudgetActivity();
                     }
                 });
+        Charts index_chart = new Charts(1, this);
     }
 
 

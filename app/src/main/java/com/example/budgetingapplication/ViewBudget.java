@@ -1,64 +1,49 @@
+/*
+Author: Jesse Thomas (jesse.thomas@snhu.edu)
+Name: ViewBudget.java
+Purpose: This class handles the activity_jesse.xml - it handles displaying and taking care of the user
+Notes: N/A
+*/
+
 package com.example.budgetingapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.EditText;
 
 public class ViewBudget extends AppCompatActivity {
-
-    float budgetInformation[] = {100000.0f, 47560.0f, 27500.0f, 5500.0f};
-    String numNames[] = {"Total Income", "Food", "Utilities", "Insurances"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jesse);
 
-        startPieChart();
-    }
+        // Instantiates the PieChart at the top of the page
+        Charts newPieChart = new Charts(-1, this);
 
+        // Variable for EditText module on ViewBudget Page
+        EditText textBox = (EditText) findViewById(R.id.vBudgetInformation);
 
-    public void startPieChart() {
-        // Pie Entries
-        List<PieEntry> pieEntries = new ArrayList<>();
+        // Acquires a static variable from the chart class to capture total income
+        float savings = newPieChart.combined_income;
 
-        for(int i = 0; i < budgetInformation.length; i++) {
-            pieEntries.add(new PieEntry(budgetInformation[i], numNames[i]));
+        // Subtraction in a loop
+        for(int i = 1; i < newPieChart.chartNumbers.length; i++)
+            savings -= newPieChart.chartNumbers[i];
+
+        // Sets bottom EditText styling and settings
+        textBox.setTextSize(20.0f);
+        textBox.setTextColor(Color.GRAY);
+        textBox.setEnabled(false);
+
+        if(savings >= 0) // Surplus budget
+        {
+            String message = getApplicationContext().getString(R.string.vBudgetInfo, savings); // tags on variables for resources
+            textBox.setText(message);
+        }else{ // Deficit
+            String message = getApplicationContext().getString(R.string.vBudgetInfodef, savings); // tags on variables for resources
+            textBox.setText(message);
         }
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Your Budget!");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        dataSet.setValueTextSize(20.0f);
-        PieData data = new PieData(dataSet);
-
-        // Chart
-        PieChart chart = (PieChart) findViewById(R.id.display_pie_chart);
-        chart.setData(data);
-
-        // Legend
-        Legend legend = chart.getLegend();
-        legend.setOrientation(Legend.LegendOrientation.VERTICAL);
-        legend.setYOffset(10.0f);
-
-        chart.setExtraBottomOffset(10.0f);
-        chart.setExtraTopOffset(10.0f);
-        chart.setDrawEntryLabels(false);
-        chart.getDescription().setText("Your Budget");
-        chart.getDescription().setTextSize(15.0f);
-        chart.animateY(1000);
-        chart.invalidate();
     }
 }
