@@ -15,20 +15,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 //Activity method
 public class NewBudgetActivity extends AppCompatActivity
@@ -52,7 +41,7 @@ public class NewBudgetActivity extends AppCompatActivity
 
         //Instantiates budget and updates values from JSON
         budget = new Budget();
-        budget = budget.UpdateBudgetfromJson(budgetFile);
+        budget = budget.UpdateBudgetFromJSON(budgetFile);
 
         //Sets all text fields to values of the budget objects properties
         EditText editText;
@@ -68,6 +57,17 @@ public class NewBudgetActivity extends AppCompatActivity
         editText.setHint(String.format("$%.2f", budget.foodExpenses));
         editText = findViewById(R.id.transportationField);
         editText.setHint(String.format("$%.2f", budget.transportationExpenses));
+        editText = findViewById(R.id.insuranceField);
+        editText.setHint(String.format("$%.2f", budget.insuranceExpenses));
+        editText = findViewById(R.id.healthCareField);
+        editText.setHint(String.format("$%.2f", budget.healthCareExpenses));
+        editText = findViewById(R.id.educationField);
+        editText.setHint(String.format("$%.2f", budget.educationExpenses));
+        editText = findViewById(R.id.entertaimentField);
+        editText.setHint(String.format("$%.2f", budget.entertainmentExpenses));
+        editText = findViewById(R.id.miscellaneousField);
+        editText.setHint(String.format("$%.2f", budget.miscellaneousExpenses));
+
     }
 
 
@@ -132,8 +132,52 @@ public class NewBudgetActivity extends AppCompatActivity
         {
             budget.transportationExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
         }
-
-
+        editText = findViewById(R.id.insuranceField);
+        if (!TextUtils.isEmpty(editText.getText()))
+        {
+            budget.insuranceExpenses = Float.parseFloat(editText.getText().toString());
+        }
+        else
+        {
+            budget.insuranceExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+        }
+        editText = findViewById(R.id.healthCareField);
+        if (!TextUtils.isEmpty(editText.getText()))
+        {
+            budget.healthCareExpenses = Float.parseFloat(editText.getText().toString());
+        }
+        else
+        {
+            budget.healthCareExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+        }
+        editText = findViewById(R.id.educationField);
+        if (!TextUtils.isEmpty(editText.getText()))
+        {
+            budget.educationExpenses = Float.parseFloat(editText.getText().toString());
+        }
+        else
+        {
+            budget.educationExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+        }
+        editText = findViewById(R.id.entertaimentField);
+        if (!TextUtils.isEmpty(editText.getText()))
+        {
+            budget.entertainmentExpenses = Float.parseFloat(editText.getText().toString());
+        }
+        else
+        {
+            budget.entertainmentExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+        }
+        editText = findViewById(R.id.miscellaneousField);
+        if (!TextUtils.isEmpty(editText.getText()))
+        {
+            budget.miscellaneousExpenses = Float.parseFloat(editText.getText().toString());
+        }
+        else
+        {
+            budget.miscellaneousExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+        }
+        
         //Declares/instantiates File object
         File file = new File(this.getFilesDir(), fileName);
         //Saves properties of budget to JSON
