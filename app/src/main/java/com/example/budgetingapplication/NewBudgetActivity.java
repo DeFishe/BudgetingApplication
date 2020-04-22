@@ -46,58 +46,11 @@ public class NewBudgetActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Instantiates gson object
-        Gson gson = new Gson();
         //Instantiates file object with expected path of budget.json
         File budgetFile = new File(this.getFilesDir(), fileName);
-        //Checks to see if budget file exists and it is not empty
-        if (budgetFile.exists() && budgetFile.length() != 0)
-        {
-            try
-            {
-                //Creates FileReader with budgetFile
-                InputStream inputStream = new FileInputStream(budgetFile);
-                StringBuilder stringBuilder = new StringBuilder();
-                String output = "";
-                if (inputStream != null)
-                {
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String receiveString = "";
-                    //Use a while loop to append the lines from the Buffered reader
-                    while ((receiveString = bufferedReader.readLine()) != null){
-                        stringBuilder.append(receiveString);
-                    }
-                    inputStream.close();
-                    output = stringBuilder.toString();
-                    //Converts json to budget object
-                    budget = gson.fromJson(output, Budget.class);
-                }
 
-            }
-            catch (FileNotFoundException e)
-            {
-                e.printStackTrace();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            try
-            {
-                //If necessary, creates missing budgetFile for future use
-                budgetFile.createNewFile();
-                //Uses default constructor to create budget with all fields set to 0
-                budget = new Budget();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
+        budget = new Budget();
+        budget = budget.UpdateBudgetfromJson(budgetFile);
 
         //Sets all text fields to values of the budget objects properties
         EditText editText;
