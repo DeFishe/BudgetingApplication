@@ -30,20 +30,32 @@ public class Budget
     public float utilitiesExpenses;
     public float foodExpenses;
     public float transportationExpenses;
+    public float insuranceExpenses;
+    public float healthCareExpenses;
+    public float educationExpenses;
+    public float entertainmentExpenses;
+    public float miscellaneousExpenses;
 
     public Budget()
     {
+        //Income
         primaryIncome = 0f;
         secondaryIncome = 0f;
 
+        //Expenses
         housingExpenses = 0f;
         utilitiesExpenses = 0f;
         foodExpenses = 0f;
         transportationExpenses = 0f;
+        insuranceExpenses = 0f;
+        healthCareExpenses = 0f;
+        educationExpenses = 0f;
+        entertainmentExpenses = 0f;
+        miscellaneousExpenses = 0f;
     }
 
 
-    public Budget UpdateBudgetfromJson(File budgetFile)
+    public Budget UpdateBudgetFromJSON(File budgetFile)
     {
         //Instantiates gson object
         Gson gson = new Gson();
