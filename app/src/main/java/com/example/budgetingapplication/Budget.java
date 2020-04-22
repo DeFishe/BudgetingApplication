@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -94,5 +96,69 @@ public class Budget
             return new Budget();
         }
         return new Budget();
+    }
+
+    public void UpdateBudgetToJSON(File file, Budget budget)
+    {
+        //Declares FileWriter
+        FileWriter fileWriter = null;
+
+        //Declares and instantiates FileWriter object
+        try
+        {
+            fileWriter = new FileWriter(file);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        //Instantiate gson object for converting budget's properties to json.
+        Gson gson = new Gson();
+        //Converts budget to string in json format
+        String budgetToWrite = gson.toJson(budget);
+        FileOutputStream fileOutputStream = null;
+        try
+        {
+            fileOutputStream = new FileOutputStream(file);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        //Convert your JSON String to Bytes and write() it
+        try
+        {
+            if (fileOutputStream != null)
+            {
+                fileOutputStream.write(budgetToWrite.getBytes());
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            if (fileOutputStream != null)
+            {
+                fileOutputStream.flush();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            if (fileOutputStream != null)
+            {
+                fileOutputStream.close();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

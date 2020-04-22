@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
 
 
     public void openMainCreateBudgetActivity() {
-        Intent intent = new Intent(this, MainCreateBudgetActivity.class);
+        Intent intent = new Intent(this, NewBudgetActivity.class);
         startActivity(intent);
     }
 
