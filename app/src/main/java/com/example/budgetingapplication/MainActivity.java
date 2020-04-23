@@ -32,8 +32,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity { // HOME CLASS
-    private Button button; // FIXME: Whoever made these please make this more descriptive
-    private Button button2;
+    //Home Navigation Buttons
+    private Button editBudgetButton;
+    private Button budgetDetailsButton;
 
     public static final String EXTRA_MESSAGE = "com.example.budgetingapplication.secondinstance";
     @Override
@@ -41,16 +42,16 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page_1);
 
-        button2 = findViewById(R.id.budgetDetailsButton);
-                  button2.setOnClickListener(new View.OnClickListener() { // Fixme: Is the indentation on this wonky or just me?
+        budgetDetailsButton = findViewById(R.id.budgetDetailsButton);
+        budgetDetailsButton.setOnClickListener(new View.OnClickListener() { // Fixme: Is the indentation on this wonky or just me?
                         @Override
                         public void onClick(View v) {
                              openViewBudget();
                          }
                   });
 
-        button = findViewById(R.id.editBudgetButton);
-                button.setOnClickListener(new View.OnClickListener() {
+        editBudgetButton = findViewById(R.id.editBudgetButton);
+                editBudgetButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         openMainCreateBudgetActivity();
@@ -59,14 +60,13 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
         Charts index_chart = new Charts(1, this);
     }
 
-
+    //Button to open the Main Create Budget Page
     public void openMainCreateBudgetActivity() {
         Intent intent = new Intent(this, NewBudgetActivity.class);
         startActivity(intent);
     }
 
-
-
+    //Button to open View Budget Page
     public void openViewBudget() {
         Intent intent = new Intent(this, ViewBudget.class);
         startActivity(intent);
@@ -75,5 +75,4 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
     // Required things: a file stream of some sort, depends on the function we're in at the time.
     private static final String FILE_NAME = "example.txt";
     EditText mEditText;
-
 }
