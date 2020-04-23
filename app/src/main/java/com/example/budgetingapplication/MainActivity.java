@@ -32,8 +32,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity { // HOME CLASS
-    private Button button; // FIXME: Whoever made these please make this more descriptive
-    private Button button2;
+    private Button editBudgetButton;
+    private Button budgetDetailsButton;
 
     public static final String EXTRA_MESSAGE = "com.example.budgetingapplication.secondinstance";
     @Override
@@ -41,16 +41,16 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page_1);
 
-        button2 = findViewById(R.id.budgetDetailsButton);
-                  button2.setOnClickListener(new View.OnClickListener() { // Fixme: Is the indentation on this wonky or just me?
+        budgetDetailsButton = findViewById(R.id.budgetDetailsButton);
+        budgetDetailsButton.setOnClickListener(new View.OnClickListener() { // Fixme: Is the indentation on this wonky or just me?
                         @Override
                         public void onClick(View v) {
                              openViewBudget();
                          }
                   });
 
-        button = findViewById(R.id.editBudgetButton);
-                button.setOnClickListener(new View.OnClickListener() {
+        editBudgetButton = findViewById(R.id.editBudgetButton);
+        editBudgetButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         openMainCreateBudgetActivity();

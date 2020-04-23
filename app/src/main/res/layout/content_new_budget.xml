@@ -16,13 +16,14 @@
 
         <TextView
             android:id="@+id/welcomeTextView"
-            android:layout_width="match_parent"
+            android:layout_width="326dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
-            android:layout_marginTop="10px"
-            android:layout_marginRight="10px"
-            android:layout_marginBottom="30px"
-            android:text="@string/welcome_text"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/welcome_text_budget_page"
+            android:textColor="00000"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -49,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Primary Income"
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="" />
 
                 <EditText
                     android:id="@+id/primaryIncomeField"
@@ -103,11 +104,12 @@
                     android:id="@+id/housingView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Housing" />
+                    android:text="Housing"
+                    />
 
                 <EditText
                     android:id="@+id/housingField"
-                    android:layout_width="wrap_content"
+                    android:layout_width="231dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -289,7 +291,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/button_selector"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
