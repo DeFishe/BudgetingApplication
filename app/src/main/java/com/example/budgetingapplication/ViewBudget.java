@@ -39,10 +39,13 @@ public class ViewBudget extends AppCompatActivity {
 
         if(savings >= 0) // Surplus budget
         {
-            String message = getApplicationContext().getString(R.string.vBudgetInfo, savings); // tags on variables for resources
+            String message = getApplicationContext().getString(R.string.vBudgetInfo, savings); // Positive Budget
             textBox.setText(message);
-        }else{ // Deficit
-            String message = getApplicationContext().getString(R.string.vBudgetInfodef, savings); // tags on variables for resources
+        }else if (savings < 0) { // Deficit
+            String message = getApplicationContext().getString(R.string.vBudgetInfodef, savings); // Negative Budget
+            textBox.setText(message);
+        }else {
+            String message = getApplicationContext().getString(R.string.vBudgetInfonone); // If all 0's
             textBox.setText(message);
         }
     }

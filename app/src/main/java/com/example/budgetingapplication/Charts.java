@@ -46,7 +46,7 @@ public class Charts {
         // Gets .json file for use
         File budgetFile = new File(this.activity.getFilesDir(), fileName);
         budget = new Budget();
-        budget = budget.UpdateBudgetfromJson(budgetFile);
+        budget = budget.UpdateBudgetFromJSON(budgetFile);
 
         // Accounts so pie chart is accurate in displaying (does not cover negative values)
         float totalIncome = budget.primaryIncome + budget.secondaryIncome;
@@ -60,7 +60,12 @@ public class Charts {
                 (budget.housingExpenses),
                 (budget.transportationExpenses),
                 (budget.utilitiesExpenses),
-                (budget.foodExpenses)
+                (budget.foodExpenses),
+                (budget.insuranceExpenses),
+                (budget.healthCareExpenses),
+                (budget.educationExpenses),
+                (budget.entertainmentExpenses),
+                (budget.miscellaneousExpenses)
                 };
         // Adding to Array<T> for Pie chart Labels
         chartLabels = new String[]{
@@ -69,7 +74,18 @@ public class Charts {
                 ("Transport"),
                 ("Utilities"),
                 ("Food"),
+                ("Insurance"),
+                ("Health Care"),
+                ("Education"),
+                ("Entertainment"),
+                ("Misc")
         };
+
+        for(int i = 0; i < chartNumbers.length; i++) {
+            if(chartNumbers[i] == 0) {
+                chartLabels[i] = null;
+            }
+        }
 
         // Regardless of what setting a class may instantiate this class from - it will run a Deficit Pie Chart if savings < 0
         if(remainingIncome < 0) {
@@ -88,7 +104,10 @@ public class Charts {
     public void LargeChart() {
 
         for(int i = 0; i < chartNumbers.length; i++) {
-            pieEntries.add(new PieEntry(chartNumbers[i], chartLabels[i]));
+
+            if (chartNumbers[i] != 0) {
+                pieEntries.add(new PieEntry(chartNumbers[i], chartLabels[i]));
+            } // If it's zero ignore
         } // Loops through length of # entries and adds them as a new PieEntry (Part of MPAndroidChart)
 
         // Pie Chart Variables - You likely need not touch these
@@ -103,7 +122,7 @@ public class Charts {
 
         // Legend Information and Tweaking
         legend.setOrientation(Legend.LegendOrientation.VERTICAL);
-        legend.setYOffset(10.0f);
+        legend.setYOffset(50.0f);
 
         // Chart Information and Tweaking
         chart.setData(data);
@@ -121,7 +140,10 @@ public class Charts {
     public void SmallChart() {
 
         for(int i = 0; i < chartNumbers.length; i++) {
-            pieEntries.add(new PieEntry(chartNumbers[i], chartLabels[i]));
+
+            if (chartNumbers[i] != 0) {
+                pieEntries.add(new PieEntry(chartNumbers[i], chartLabels[i]));
+            } // If it's zero ignore
         } // Loops through length of # entries and adds them as a new PieEntry (Part of MPAndroidChart)
 
         // Pie Chart Variables - You likely need not touch these
