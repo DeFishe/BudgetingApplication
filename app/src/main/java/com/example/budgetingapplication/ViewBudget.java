@@ -1,22 +1,16 @@
+/*
+Author: Jesse Thomas (jesse.thomas@snhu.edu)
+Name: ViewBudget.java
+Purpose: This class handles the activity_jesse.xml - it handles displaying and taking care of the user
+Notes: N/A
+*/
+
 package com.example.budgetingapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.TextView;
-
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.EditText;
 
 public class ViewBudget extends AppCompatActivity {
 
@@ -25,6 +19,7 @@ public class ViewBudget extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jesse);
 
+        // Instantiates the PieChart at the top of the page
         Charts newPieChart = new Charts(-1, this);
 
         // Variable for EditText module on ViewBudget Page
@@ -49,7 +44,7 @@ public class ViewBudget extends AppCompatActivity {
         }else if (savings < 0) { // Deficit
             String message = getApplicationContext().getString(R.string.vBudgetInfodef, savings); // Negative Budget
             textBox.setText(message);
-        }else {
+        }else{
             String message = getApplicationContext().getString(R.string.vBudgetInfonone); // If all 0's
             textBox.setText(message);
         }

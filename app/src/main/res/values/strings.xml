@@ -11,5 +11,5 @@
     <string name="action_settings">Settings</string>
     <string name="vBudgetInfo">You are currently saving $%1$f in your budget. SmolBudget recommends saving at least 20%% of your total income!</string>
     <string name="vBudgetInfodef">Uh oh! It seems the budget you made puts you $%1$f in debt! Please consider re-doing your budget!</string>
-    <string name="vBudgetInfonone">Nothing to see here! You either didn't save your information or entered all 0s!</string>
+    <string name="vBudgetInfonone">Nothing to see here! You either did not save your information or entered all 0s!</string>
 </resources>
