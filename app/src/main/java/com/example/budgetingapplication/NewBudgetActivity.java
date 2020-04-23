@@ -7,7 +7,6 @@
 
 package com.example.budgetingapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +14,20 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 //Activity method
 public class NewBudgetActivity extends AppCompatActivity
@@ -36,42 +46,76 @@ public class NewBudgetActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Instantiates gson object
+        Gson gson = new Gson();
         //Instantiates file object with expected path of budget.json
         File budgetFile = new File(this.getFilesDir(), fileName);
+        //Checks to see if budget file exists and it is not empty
+        if (budgetFile.exists() && budgetFile.length() != 0)
+        {
+            try
+            {
+                //Creates FileReader with budgetFile
+                InputStream inputStream = new FileInputStream(budgetFile);
+                StringBuilder stringBuilder = new StringBuilder();
+                String output = "";
+                if (inputStream != null)
+                {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String receiveString = "";
+                    //Use a while loop to append the lines from the Buffered reader
+                    while ((receiveString = bufferedReader.readLine()) != null){
+                        stringBuilder.append(receiveString);
+                    }
+                    inputStream.close();
+                    output = stringBuilder.toString();
+                    //Converts json to budget object
+                    budget = gson.fromJson(output, Budget.class);
+                }
 
-        //Instantiates budget and updates values from JSON
-        budget = new Budget();
-        budget = budget.UpdateBudgetFromJSON(budgetFile);
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            try
+            {
+                //If necessary, creates missing budgetFile for future use
+                budgetFile.createNewFile();
+                //Uses default constructor to create budget with all fields set to 0
+                budget = new Budget();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
 
         //Sets all text fields to values of the budget objects properties
         EditText editText;
         editText = findViewById(R.id.primaryIncomeField);
-        editText.setHint(String.format("$%.2f", budget.primaryIncome));
+        editText.setHint(String.valueOf(budget.primaryIncome));
         editText = findViewById(R.id.secondaryIncomeField);
-        editText.setHint(String.format("$%.2f", budget.secondaryIncome));
+        editText.setHint(String.valueOf(budget.secondaryIncome));
         editText = findViewById(R.id.housingField);
-        editText.setHint(String.format("$%.2f", budget.housingExpenses));
+        editText.setHint(String.valueOf(budget.housingExpenses));
         editText = findViewById(R.id.utilitesField);
-        editText.setHint(String.format("$%.2f", budget.utilitiesExpenses));
+        editText.setHint(String.valueOf(budget.utilitiesExpenses));
         editText = findViewById(R.id.foodField);
-        editText.setHint(String.format("$%.2f", budget.foodExpenses));
+        editText.setHint(String.valueOf(budget.foodExpenses));
         editText = findViewById(R.id.transportationField);
-        editText.setHint(String.format("$%.2f", budget.transportationExpenses));
-        editText = findViewById(R.id.insuranceField);
-        editText.setHint(String.format("$%.2f", budget.insuranceExpenses));
-        editText = findViewById(R.id.healthCareField);
-        editText.setHint(String.format("$%.2f", budget.healthCareExpenses));
-        editText = findViewById(R.id.educationField);
-        editText.setHint(String.format("$%.2f", budget.educationExpenses));
-        editText = findViewById(R.id.entertaimentField);
-        editText.setHint(String.format("$%.2f", budget.entertainmentExpenses));
-        editText = findViewById(R.id.miscellaneousField);
-        editText.setHint(String.format("$%.2f", budget.miscellaneousExpenses));
-
+        editText.setHint(String.valueOf(budget.transportationExpenses));
     }
 
-
-    //Method that updates budget file when update button is clicked
+    //Method that updates budget file when update is button is clicked FIXME: bruh read the last 4 words again lol
     public void updateBudget(View view)
     {
         //Instantiates EditText object for later use
@@ -85,7 +129,7 @@ public class NewBudgetActivity extends AppCompatActivity
         }
         else
         {
-            budget.primaryIncome = Float.parseFloat(editText.getHint().toString().substring(1));
+            budget.primaryIncome = Float.parseFloat(editText.getHint().toString());
         }
         editText = findViewById(R.id.secondaryIncomeField);
         if (!TextUtils.isEmpty(editText.getText()))
@@ -94,7 +138,7 @@ public class NewBudgetActivity extends AppCompatActivity
         }
         else
         {
-            budget.secondaryIncome = Float.parseFloat(editText.getHint().toString().substring(1));
+            budget.secondaryIncome = Float.parseFloat(editText.getHint().toString());
         }
         editText = findViewById(R.id.housingField);
         if (!TextUtils.isEmpty(editText.getText()))
@@ -103,7 +147,7 @@ public class NewBudgetActivity extends AppCompatActivity
         }
         else
         {
-            budget.housingExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+            budget.housingExpenses = Float.parseFloat(editText.getHint().toString());
         }
         editText = findViewById(R.id.utilitesField);
         if (!TextUtils.isEmpty(editText.getText()))
@@ -112,7 +156,7 @@ public class NewBudgetActivity extends AppCompatActivity
         }
         else
         {
-            budget.utilitiesExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+            budget.utilitiesExpenses = Float.parseFloat(editText.getHint().toString());
         }
         editText = findViewById(R.id.foodField);
         if (!TextUtils.isEmpty(editText.getText()))
@@ -121,7 +165,7 @@ public class NewBudgetActivity extends AppCompatActivity
         }
         else
         {
-            budget.foodExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+            budget.foodExpenses = Float.parseFloat(editText.getHint().toString());
         }
         editText = findViewById(R.id.transportationField);
         if (!TextUtils.isEmpty(editText.getText()))
@@ -130,62 +174,71 @@ public class NewBudgetActivity extends AppCompatActivity
         }
         else
         {
-            budget.transportationExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
+            budget.transportationExpenses = Float.parseFloat(editText.getHint().toString());
         }
-        editText = findViewById(R.id.insuranceField);
-        if (!TextUtils.isEmpty(editText.getText()))
-        {
-            budget.insuranceExpenses = Float.parseFloat(editText.getText().toString());
-        }
-        else
-        {
-            budget.insuranceExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
-        }
-        editText = findViewById(R.id.healthCareField);
-        if (!TextUtils.isEmpty(editText.getText()))
-        {
-            budget.healthCareExpenses = Float.parseFloat(editText.getText().toString());
-        }
-        else
-        {
-            budget.healthCareExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
-        }
-        editText = findViewById(R.id.educationField);
-        if (!TextUtils.isEmpty(editText.getText()))
-        {
-            budget.educationExpenses = Float.parseFloat(editText.getText().toString());
-        }
-        else
-        {
-            budget.educationExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
-        }
-        editText = findViewById(R.id.entertaimentField);
-        if (!TextUtils.isEmpty(editText.getText()))
-        {
-            budget.entertainmentExpenses = Float.parseFloat(editText.getText().toString());
-        }
-        else
-        {
-            budget.entertainmentExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
-        }
-        editText = findViewById(R.id.miscellaneousField);
-        if (!TextUtils.isEmpty(editText.getText()))
-        {
-            budget.miscellaneousExpenses = Float.parseFloat(editText.getText().toString());
-        }
-        else
-        {
-            budget.miscellaneousExpenses = Float.parseFloat(editText.getHint().toString().substring(1));
-        }
-        
+
         //Declares/instantiates File object
         File file = new File(this.getFilesDir(), fileName);
-        //Saves properties of budget to JSON
-        budget.UpdateBudgetToJSON(file, budget);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        //Declares FileWriter
+        FileWriter fileWriter = null;
+
+        //Declares and instantiates FileWriter object
+        try
+        {
+            fileWriter = new FileWriter(file);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        //Instantiate gson object for converting budget's properties to json.
+        Gson gson = new Gson();
+        //Converts budget to string in json format
+        String budgetToWrite = gson.toJson(budget);
+        FileOutputStream fileOutputStream = null;
+        try
+        {
+            fileOutputStream = new FileOutputStream(file);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        //Convert your JSON String to Bytes and write() it
+        try
+        {
+            if (fileOutputStream != null)
+            {
+                fileOutputStream.write(budgetToWrite.getBytes());
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            if (fileOutputStream != null)
+            {
+                fileOutputStream.flush();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        try
+        {
+            if (fileOutputStream != null)
+            {
+                fileOutputStream.close();
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
-
-
 }
