@@ -30,7 +30,7 @@ public class ViewBudget extends AppCompatActivity {
         ChangeChart(3);
 
         view.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) { // Listener for the Switch on the activity_jesse.xmlreall
                 if (isChecked) { // Piechart
                     Toast.makeText(ViewBudget.this, "Settings: Pie Chart", Toast.LENGTH_LONG).show();
                     ChangeChart(0);

@@ -1,7 +1,7 @@
 /*
 Author: Jesse Thomas (jesse.thomas@snhu.edu)
 Name: Charts.java
-Purpose: This class handles the information regarding PieCharts, it offers three types. Large, Small, and Deficit
+Purpose: This class handles the information regarding PieCharts, it offers three types. Large, Small, Deficit, and Bar
 Notes: If you wish to call a large pie chart please use a negative number, for small use positive.
         The code will overwrite whatever you put automatically if it detects a deficit. Refer 'this' as the second argument
 */
@@ -117,7 +117,7 @@ public class Charts {
     public void LargeChart() {
 
         this.activity.findViewById(R.id.display_bar_chart).setAlpha(0); // Hide the Bar Chart
-        this.activity.findViewById(R.id.display_pie_chart).setAlpha(1);
+        this.activity.findViewById(R.id.display_pie_chart).setAlpha(1); // Redisplay this chart (Priority)
 
         for(int i = 0; i < chartNumbers.length; i++) {
 
@@ -216,7 +216,7 @@ public class Charts {
     public void BarGraph() {
 
         this.activity.findViewById(R.id.display_pie_chart).setAlpha(0); // hide the PieChart underlapping
-        this.activity.findViewById(R.id.display_bar_chart).setAlpha(1);
+        this.activity.findViewById(R.id.display_bar_chart).setAlpha(1); // Prioritize this chart module
         BarChart barChart = activity.findViewById(R.id.display_bar_chart); // Reference the BarChart module in XML design
         List<BarEntry> entries = new ArrayList<>();
 
@@ -230,16 +230,16 @@ public class Charts {
 
         int count = 0;
         for(int i = 0; i < chartLabels.length; i++) {
-            if(chartLabels[i] != null)
+            if(chartLabels[i] != null) // In case the chartLabels contains null indexes (which happens if an entry # is 0)
                 count++;
         }
 
 
-        String labels[] = new String[count];
+        String labels[] = new String[count]; // Size of non-null version of chartLabels
 
         // Shortens string length
         for(int i = 0; i < labels.length; i++) {
-            labels[i] = new String(chartLabels[i]);
+            labels[i] = new String(chartLabels[i]); // Labels array is used in place of other array as it's a little different
             String temp = labels[i];
             for (int j = labels[i].length() - 1; j >= 0; j--) {
                 temp = labels[i].substring(0, 3);
@@ -252,8 +252,9 @@ public class Charts {
         set.setValueTextSize(10.0f);
 
         BarData data = new BarData(set);
-        data.setBarWidth((0.8f));
+        data.setBarWidth((0.8f)); // Width of each bar
 
+        // Initial data setup in Bar Graph
         barChart.setData(data);
 
         // XAxis Parameters
