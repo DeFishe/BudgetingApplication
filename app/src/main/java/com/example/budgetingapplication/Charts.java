@@ -27,6 +27,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +94,7 @@ public class Charts {
 
         for(int i = 0; i < chartNumbers.length; i++) {
             if(chartNumbers[i] == 0) {
-                chartLabels[i] = null;
+                chartLabels[i] = "";
             }
         }
 
@@ -228,24 +229,18 @@ public class Charts {
             } // If it's zero ignore
         } // Loops through length of # entries and adds them as a new PieEntry (Part of MPAndroidChart)
 
-        int count = 0;
-        for(int i = 0; i < chartLabels.length; i++) {
-            if(chartLabels[i] != null) // In case the chartLabels contains null indexes (which happens if an entry # is 0)
-                count++;
-        }
-
-
-        String labels[] = new String[count]; // Size of non-null version of chartLabels
-
-        // Shortens string length
-        for(int i = 0; i < labels.length; i++) {
-            labels[i] = new String(chartLabels[i]); // Labels array is used in place of other array as it's a little different
-            String temp = labels[i];
-            for (int j = labels[i].length() - 1; j >= 0; j--) {
-                temp = labels[i].substring(0, 3);
-                labels[i] = temp;
-            }
-        }
+        String labels[] = new String[]{
+                ("Sav"),
+                ("Hous"),
+                ("Tra"),
+                ("Util"),
+                ("Food"),
+                ("Insur"),
+                ("Health"),
+                ("Edu"),
+                ("Ent"),
+                ("Misc")
+        };
 
         // Description tag for BarDataSet
         BarDataSet set = new BarDataSet(entries, "Your Budget");
