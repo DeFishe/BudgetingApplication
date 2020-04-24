@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity { // HOME CLASS
                         openMainCreateBudgetActivity();
                     }
                 });
-        Charts index_chart = new Charts(1, this);
+        Charts index_chart = new Charts(1, this); // 1 = Small Chart
     }
 
 

@@ -10,12 +10,20 @@ package com.example.budgetingapplication;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Log;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.io.File;
@@ -91,19 +99,25 @@ public class Charts {
 
         // Regardless of what setting a class may instantiate this class from - it will run a Deficit Pie Chart if savings < 0
         if(remainingIncome < 0) {
-            ChartType = 0;
+            ChartType = 2;
         }
+
         // Chart Type
-        if (ChartType < 0)
+        if (ChartType == 0)
             LargeChart();
-        else if (ChartType > 0)
+        else if (ChartType == 1)
             SmallChart();
-        else
+        else if (ChartType == 2)
             DeficitChart();
+        else if (ChartType == 3)
+            BarGraph();
     }
 
     // Returns formatted Small Chart
     public void LargeChart() {
+
+        this.activity.findViewById(R.id.display_bar_chart).setAlpha(0); // Hide the Bar Chart
+        this.activity.findViewById(R.id.display_pie_chart).setAlpha(1);
 
         for(int i = 0; i < chartNumbers.length; i++) {
 
@@ -196,5 +210,68 @@ public class Charts {
         chart.getDescription().setEnabled(false);
         chart.animateY(750);
         chart.invalidate(); // Refreshes / Draws Chart
+    }
+
+    // Used when Labels may overlap severely with PieChart (bad display issue)
+    public void BarGraph() {
+
+        this.activity.findViewById(R.id.display_pie_chart).setAlpha(0); // hide the PieChart underlapping
+        this.activity.findViewById(R.id.display_bar_chart).setAlpha(1);
+        BarChart barChart = activity.findViewById(R.id.display_bar_chart); // Reference the BarChart module in XML design
+        List<BarEntry> entries = new ArrayList<>();
+
+        for (int i = 0; i < chartNumbers.length; i++) {
+
+            if (chartNumbers[i] != 0) {
+                entries.add(new BarEntry(i, chartNumbers[i]));
+
+            } // If it's zero ignore
+        } // Loops through length of # entries and adds them as a new PieEntry (Part of MPAndroidChart)
+
+        int count = 0;
+        for(int i = 0; i < chartLabels.length; i++) {
+            if(chartLabels[i] != null)
+                count++;
+        }
+
+
+        String labels[] = new String[count];
+
+        // Shortens string length
+        for(int i = 0; i < labels.length; i++) {
+            labels[i] = new String(chartLabels[i]);
+            String temp = labels[i];
+            for (int j = labels[i].length() - 1; j >= 0; j--) {
+                temp = labels[i].substring(0, 3);
+                labels[i] = temp;
+            }
+        }
+
+        // Description tag for BarDataSet
+        BarDataSet set = new BarDataSet(entries, "Your Budget");
+        set.setValueTextSize(10.0f);
+
+        BarData data = new BarData(set);
+        data.setBarWidth((0.8f));
+
+        barChart.setData(data);
+
+        // XAxis Parameters
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+        xAxis.setGranularity(1);
+        xAxis.setCenterAxisLabels(false);
+        xAxis.setAxisMinimum(data.getXMin() - 0.5f);
+        xAxis.setAxisMaximum(data.getXMax() + 0.5f);
+        xAxis.setLabelCount(10);
+
+        barChart.getLegend().setEnabled(false);
+        barChart.getDescription().setEnabled(false);
+        barChart.animateY(1000);
+
+        // Draws Graph
+        barChart.invalidate();
+
     }
 }
