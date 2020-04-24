@@ -5,8 +5,10 @@
     <string name="current_tax_bracket">Your current tax bracket: </string>
     <string name="total_sum_expenses">The total sum (%) Budget:Tax ratio: </string>
     <string name="title_activity_new_budget">Edit Budget</string>
-    <string name="welcome_text">
-        "Welcome to SmolBudget: the budgeting app for those who want to start with small changes. This is the page where you begin a new budget."
+    <string name="welcome_text_budget_page">
+        "Begin Your New Budget Here"
+    </string> <string name="welcomeText">
+        "Welcome to SmolBudget: the budgeting app for those who want to start with small changes."
     </string>
     <string name="action_settings">Settings</string>
     <string name="vBudgetInfo">You are currently saving $%1$f in your budget. SmolBudget recommends saving at least 20%% of your total income!</string>
